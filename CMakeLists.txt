@@ -51,8 +51,11 @@ include(Public)
 
 pxr_toplevel_prologue()
 
-add_subdirectory(pxr)
-add_subdirectory(extras)
+# disable building of the core usd libraries, for when you just want to rebuild a dcc plugin:
+if (${PXR_BUILD_USD})
+    add_subdirectory(pxr)
+    add_subdirectory(extras)
+endif()
 
 function(_addIfExists pkg pkgCmakeLists)
     if (EXISTS ${pkgCmakeLists})
